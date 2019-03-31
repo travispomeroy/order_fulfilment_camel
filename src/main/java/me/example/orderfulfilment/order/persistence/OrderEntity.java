@@ -72,7 +72,7 @@ public class OrderEntity implements Serializable {
     * @return the customer
     */
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "customer_id", nullable = false)
+   @JoinColumn(name = "customerId", nullable = false)
    public CustomerEntity getCustomer() {
       return customer;
    }

@@ -7,9 +7,9 @@ public class Customer {
     private String lastName;
     private String email;
 
-    Customer() {}
+    public Customer() {}
 
-    Customer(long id, String firstName, String lastName, String email) {
+    public Customer(long id, String firstName, String lastName, String email) {
         super();
         this.id = id;
         this.firstName = firstName;

@@ -5,7 +5,7 @@ import me.example.orderfulfilment.catalogitem.domain.CatalogItem;
 import java.math.BigDecimal;
 import java.util.Date;
 
-class OrderItem {
+public class OrderItem {
 
     private long id;
     private CatalogItem catalogItem;
@@ -14,11 +14,11 @@ class OrderItem {
     private Date lastUpdate;
     private int quantity;
 
-    OrderItem() {
+    public OrderItem() {
 
     }
 
-    OrderItem(long id, CatalogItem catalogItem, String status, BigDecimal price,
+    public OrderItem(long id, CatalogItem catalogItem, String status, BigDecimal price,
               Date lastUpdate, int quantity) {
         super();
         this.id = id;
@@ -37,7 +37,7 @@ class OrderItem {
         this.id = id;
     }
 
-    CatalogItem getCatalogItem() {
+    public CatalogItem getCatalogItem() {
         return catalogItem;
     }
 
@@ -53,7 +53,7 @@ class OrderItem {
         this.status = status;
     }
 
-    BigDecimal getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -69,7 +69,7 @@ class OrderItem {
         this.lastUpdate = lastUpdate;
     }
 
-    int getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

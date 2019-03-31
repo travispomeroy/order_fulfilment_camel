@@ -4,9 +4,7 @@ databaseChangeLog:
       author: pomeroyt
       changes:
         - createTable:
-            catalogName: orders
             tableName: order
-            tablespace: pg_default
             columns:
               - column:
                   name: id

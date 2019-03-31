@@ -7,10 +7,10 @@ public class CatalogItem {
     private String itemName;
     private String itemType;
 
-    CatalogItem() {
+    public CatalogItem() {
     }
 
-    CatalogItem(long id, String itemNumber, String itemName, String itemType) {
+    public CatalogItem(long id, String itemNumber, String itemName, String itemType) {
         this.id = id;
         this.itemNumber = itemNumber;
         this.itemName = itemName;
@@ -25,7 +25,7 @@ public class CatalogItem {
         this.id = id;
     }
 
-    String getItemNumber() {
+    public String getItemNumber() {
         return itemNumber;
     }
 

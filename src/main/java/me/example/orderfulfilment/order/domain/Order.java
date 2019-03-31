@@ -13,10 +13,10 @@ public class Order {
     private Date lastUpdate;
     private String status;
 
-    Order() {
+    public Order() {
     }
 
-    Order(long id, Customer customer, String orderNumber,
+    public Order(long id, Customer customer, String orderNumber,
           Date timeOrderPlaced, Date lastUpdate, String status) {
         super();
         this.id = id;
@@ -27,7 +27,7 @@ public class Order {
         this.status = status;
     }
 
-    long getId() {
+    public long getId() {
         return id;
     }
 
@@ -43,7 +43,7 @@ public class Order {
         this.customer = customer;
     }
 
-    String getOrderNumber() {
+    public String getOrderNumber() {
         return orderNumber;
     }
 
@@ -51,7 +51,7 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
-    Date getTimeOrderPlaced() {
+    public Date getTimeOrderPlaced() {
         return timeOrderPlaced;
     }
 
@@ -71,7 +71,7 @@ public class Order {
         return status;
     }
 
-    void setStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
