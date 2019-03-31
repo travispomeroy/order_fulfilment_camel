@@ -1,8 +1,8 @@
-package me.example.orderfulfilment.order;
+package me.example.orderfulfilment.order.persistence;
 
 
-import me.example.orderfulfilment.customer.CustomerEntity;
-import me.example.orderfulfilment.order.orderitem.OrderItemEntity;
+import me.example.orderfulfilment.customer.persistence.CustomerEntity;
+import me.example.orderfulfilment.orderitem.persistence.OrderItemEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;

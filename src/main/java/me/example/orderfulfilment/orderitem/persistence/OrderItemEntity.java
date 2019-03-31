@@ -1,7 +1,7 @@
-package me.example.orderfulfilment.order.orderitem;
+package me.example.orderfulfilment.orderitem.persistence;
 
-import me.example.orderfulfilment.catalogitem.CatalogItemEntity;
-import me.example.orderfulfilment.order.OrderEntity;
+import me.example.orderfulfilment.catalogitem.persistence.CatalogItemEntity;
+import me.example.orderfulfilment.order.persistence.OrderEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;

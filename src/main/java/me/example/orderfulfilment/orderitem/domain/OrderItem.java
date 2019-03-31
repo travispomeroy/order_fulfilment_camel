@@ -1,71 +1,86 @@
-package me.example.orderfulfilment.order.orderitem.dto;
+package me.example.orderfulfilment.orderitem.domain;
 
-import me.example.orderfulfilment.catalogitem.dto.CatalogItemDto;
+import me.example.orderfulfilment.catalogitem.domain.CatalogItem;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderItemDto {
+class OrderItem {
 
     private long id;
-    private CatalogItemDto catalogItem;
+    private CatalogItem catalogItem;
     private String status;
     private BigDecimal price;
     private Date lastUpdate;
     private int quantity;
 
-    public long getId() {
+    OrderItem() {
+
+    }
+
+    OrderItem(long id, CatalogItem catalogItem, String status, BigDecimal price,
+              Date lastUpdate, int quantity) {
+        super();
+        this.id = id;
+        this.catalogItem = catalogItem;
+        this.status = status;
+        this.price = price;
+        this.lastUpdate = lastUpdate;
+        this.quantity = quantity;
+    }
+
+    long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    void setId(long id) {
         this.id = id;
     }
 
-    public CatalogItemDto getCatalogItem() {
+    CatalogItem getCatalogItem() {
         return catalogItem;
     }
 
-    public void setCatalogItem(CatalogItemDto catalogItem) {
+    void setCatalogItem(CatalogItem catalogItem) {
         this.catalogItem = catalogItem;
     }
 
-    public String getStatus() {
+    String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    void setStatus(String status) {
         this.status = status;
     }
 
-    public BigDecimal getPrice() {
+    BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Date getLastUpdate() {
+    Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-    public int getQuantity() {
+    int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("OrderItemDto [id=");
+        builder.append("OrderItem [id=");
         builder.append(id);
         builder.append(", ");
         if (catalogItem != null) {
