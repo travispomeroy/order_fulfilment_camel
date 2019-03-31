@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - addForeignKeyConstraint:
+      baseColumnNames: customerId
+      baseTableName: order
+      constraintName: order_customer_fk
+      onDelete: CASCADE
+      onUpdate: RESTRICT
+      referencedColumnNames: id
+      referencedTableName: customer

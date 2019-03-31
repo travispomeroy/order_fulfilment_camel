@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - includeAll:
+      path: db/changelog/install/constraints
+  - includeAll:
+      path: db/changelog/install/tables
+#  - includeAll:
+#      path: db/changelog/latest/views
+  - changeSet:
+      id: 1
+      author: "MajorVersion"
+      changes:
+        - empty: {}
+#  - include:
+#      file: db/changelog/update.yaml

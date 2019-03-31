@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_catalogItem_table
+      author: pomeroyt
+      changes:
+        - createTable:
+            catalogName: orders
+            tableName: catalogItem
+            tablespace: pg_default
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: "CAT_ITEM_PK"
+              - column:
+                  name: itemNumber
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: itemName
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: itemType
+                  type: text
+                  constraints:
+                    nullable: false

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - addForeignKeyConstraint:
+      baseColumnNames: orderId
+      baseTableName: orderItem
+      constraintName: orderItem_order_fk
+      onDelete: CASCADE
+      onUpdate: RESTRICT
+      referencedColumnNames: id
+      referencedTableName: order
+  - addForeignKeyConstraint:
+      baseColumnNames: catalogItemId
+      baseTableName: orderItem
+      constraintName: catalogItemId_catalogItem_fk
+      onDelete: CASCADE
+      onUpdate: RESTRICT
+      referencedColumnNames: id
+      referencedTableName: catalogItem

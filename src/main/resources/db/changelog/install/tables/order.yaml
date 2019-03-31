@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_order_table
+      author: pomeroyt
+      changes:
+        - createTable:
+            catalogName: orders
+            tableName: order
+            tablespace: pg_default
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: "ORDER_PK"
+              - column:
+                  name: customerId
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: orderNumber
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: timeOrderPlaced
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastUpdate
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: text
+                  constraints:
+                    nullable: false

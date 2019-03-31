@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_customer_table
+      author: pomeroyt
+      changes:
+        - createTable:
+            catalogName: orders
+            tableName: customer
+            tablespace: pg_default
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: "CUST_PK"
+              - column:
+                  name: firstName
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastName
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: text
+                  constraints:
+                    nullable: false
