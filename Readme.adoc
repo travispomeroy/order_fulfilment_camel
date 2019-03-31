@@ -1,0 +1,10 @@
+== Order Fulfilment Sprint Boot Application
+
+This application recieves orders from a database and sends those orders to a fulfillment
+center in a file.
+
+=== New Requirements
+
+* Handle multiple fulfilment centers
+* Recieve orders from new sources
+* Process orders faster

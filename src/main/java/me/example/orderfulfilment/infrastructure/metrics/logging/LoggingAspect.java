@@ -13,13 +13,16 @@ import static java.lang.String.format;
 @Aspect
 class LoggingAspect {
 
-    @Pointcut("target(org.springframework.data.repository.Repository)")
+    @Pointcut("target(org.springframework.data.repository.PagingAndSortingRepository)")
     void allRepositories() {}
+
+    @Pointcut("target(org.springframework.data.jpa.repository.JpaRepository)")
+    void allJpaRepositories() {}
 
     @Pointcut("@within(me.example.orderfulfilment.infrastructure.metrics.logging.Log)")
     void logAnnotation() {}
 
-    @Around("allRepositories() || logAnnotation()")
+    @Around("allRepositories() || logAnnotation() || allJpaRepositories()")
     Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();

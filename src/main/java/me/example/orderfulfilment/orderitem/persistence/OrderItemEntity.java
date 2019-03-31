@@ -70,7 +70,7 @@ public class OrderItemEntity implements Serializable {
     * @return the order
     */
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "order_id", nullable = false)
+   @JoinColumn(name = "orderId", nullable = false)
    public OrderEntity getOrder() {
       return order;
    }
@@ -87,7 +87,7 @@ public class OrderItemEntity implements Serializable {
     * @return the catalogItem
     */
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "catalogItem_id", nullable = false)
+   @JoinColumn(name = "catalogItemId", nullable = false)
    public CatalogItemEntity getCatalogItem() {
       return catalogItem;
    }
