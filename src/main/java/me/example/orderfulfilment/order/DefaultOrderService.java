@@ -1,5 +1,9 @@
 package me.example.orderfulfilment.order;
 
+import me.example.orderfulfillment.generated.FulfillmentClient;
+import me.example.orderfulfillment.generated.ObjectFactory;
+import me.example.orderfulfillment.generated.OrderItemType;
+import me.example.orderfulfillment.generated.OrderType;
 import me.example.orderfulfilment.catalogitem.domain.CatalogItem;
 import me.example.orderfulfilment.catalogitem.persistence.CatalogItemEntity;
 import me.example.orderfulfilment.customer.domain.Customer;
@@ -20,9 +24,13 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.io.StringWriter;
+import java.util.*;
 
 @Transactional
 @Service
@@ -110,6 +118,50 @@ public class DefaultOrderService implements OrderService {
                      + id + "|: " + e.getMessage(), e);
       }
       return orderItems;
+   }
+
+   @Override
+   public String processCreateOrderMessage(Long id) throws JAXBException {
+      Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+      ObjectFactory objectFactory = new ObjectFactory();
+      me.example.orderfulfillment.generated.Order order = orderEntity.map(this::buildOrderXmlType).orElseGet(objectFactory::createOrder);
+
+      JAXBContext jaxbContext = JAXBContext.newInstance(me.example.orderfulfillment.generated.Order.class);
+      Marshaller marshaller = jaxbContext.createMarshaller();
+      marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+      StringWriter writer = new StringWriter();
+      marshaller.marshal(order, writer);
+      return writer.toString();
+   }
+
+   private me.example.orderfulfillment.generated.Order buildOrderXmlType(OrderEntity orderEntity) {
+      ObjectFactory objectFactory = new ObjectFactory();
+      OrderType orderType = objectFactory.createOrderType();
+      orderType.setFirstName(orderEntity.getCustomer().getFirstName());
+      orderType.setLastName(orderEntity.getCustomer().getLastName());
+      orderType.setEmail(orderEntity.getCustomer().getEmail());
+      orderType.setFulfillmentCenter(FulfillmentClient.ABC_FULFILLMENT_CENTER);
+      orderType.setOrderNumber(orderEntity.getOrderNumber());
+      orderType.setTimeOrderPlaced(getXmlDate(orderEntity.getTimeOrderPlaced()));
+
+      for (OrderItemEntity orderItemEntity : orderEntity.getOrderItems()) {
+         OrderItemType orderItemType = objectFactory.createOrderItemType();
+         orderItemType.setItemNumber(orderItemEntity.getCatalogItem().getItemNumber());
+         orderItemEntity.setPrice(orderItemEntity.getPrice());
+         orderItemEntity.setQuantity(orderItemEntity.getQuantity());
+         orderType.getOrderItems().add(orderItemType);
+      }
+
+      me.example.orderfulfillment.generated.Order order = objectFactory.createOrder();
+      order.setOrderType(orderType);
+
+      return order;
+   }
+
+   private XMLGregorianCalendar getXmlDate(Date date) {
+      GregorianCalendar c = new GregorianCalendar();
+      c.setTime(date);
+      return DatatypeFactory.newDefaultInstance().newXMLGregorianCalendar(c);
    }
 
    private void populateOrderDetails(List<Order> orders,

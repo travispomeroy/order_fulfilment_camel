@@ -2,6 +2,7 @@ package me.example.orderfulfilment.order.domain;
 
 import me.example.orderfulfilment.orderitem.domain.OrderItem;
 
+import javax.xml.bind.JAXBException;
 import java.util.List;
 
 public interface OrderService {
@@ -16,4 +17,6 @@ public interface OrderService {
          throws Exception;
 
    List<OrderItem> getOrderItems(long id);
+
+    String processCreateOrderMessage(Long id) throws JAXBException;
 }

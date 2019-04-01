@@ -29,8 +29,8 @@ public class OrderController {
    }
 
    @RequestMapping(value = "/processOrders", method = RequestMethod.GET)
-   public String processOrdersRender() {
-      return "processOrders";
+   public ResponseEntity<String> processOrdersRender() {
+      return ResponseEntity.ok("Got the Order!!!");
    }
 
    @RequestMapping(value = "/processOrders", method = RequestMethod.POST)

@@ -18,8 +18,52 @@ ext {
     snippetsDir = file('build/generated-snippets')
 }
 
+configurations {
+    jaxb
+}
+
+task genJaxb {
+    ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.classesDir = "${buildDir}/classes/jaxb"
+    ext.schema = "${projectDir}/src/main/resources/xsd/order.xsd"
+    outputs.dir classesDir
+
+    doLast() {
+        project.ant {
+            // Create output directories
+            mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
+
+            taskdef name: 'xjc', classname: 'com.sun.tools.xjc.XJCTask', classpath: configurations.jaxb.asPath
+
+            xjc(destdir: sourcesDir, schema: schema, 'package': 'me.example' +
+                    '.orderfulfillment.generated') {
+                produces(dir: sourcesDir, includes: '**/*.java')
+            }
+
+            javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+                    debugLevel: 'lines,vars,source',
+                    includeantruntime: false,
+                    classpath: configurations.jaxb.asPath) {
+                src(path: sourcesDir)
+                include(name: '**/*.java')
+                include(name: '*.java')
+            }
+
+            copy(todir: classesDir) {
+                fileset(dir: sourcesDir, erroronmissingdir: false) {
+                    exclude(name: '**/*.java')
+                }
+            }
+        }
+    }
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-activemq'
+    implementation ('org.springframework.boot:spring-boot-starter-activemq') {
+        exclude group: 'org.apache.activemq', module: 'activemq-broker'
+    }
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
@@ -31,6 +75,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.apache.camel:camel-spring-boot-starter:2.23.1'
     implementation 'org.apache.camel:camel-sql-starter:2.23.1'
+    compile 'org.apache.camel:camel-jms:2.23.1'
+    implementation 'org.apache.activemq:activemq-pool'
+
+    compile 'org.apache.activemq:activemq-camel:5.15.8'
     implementation 'org.apache.kafka:kafka-streams'
     implementation 'org.liquibase:liquibase-core'
     implementation 'org.springframework.kafka:spring-kafka'
@@ -41,10 +89,13 @@ dependencies {
     testImplementation 'org.apache.camel:camel-test-spring:2.23.1'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-    
+
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'net.sf.opencsv:opencsv:2.3'
     compile 'io.hawt:hawtio-springboot:2.5.0'
+
+    compile(files(genJaxb.classesDir).builtBy(genJaxb))
+    jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
 }
 
 test {
@@ -54,4 +105,10 @@ test {
 asciidoctor {
     inputs.dir snippetsDir
     dependsOn test
+}
+
+compileJava.dependsOn 'genJaxb'
+
+jar {
+    from genJaxb.classesDir
 }

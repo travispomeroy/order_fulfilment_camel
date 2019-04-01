@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.Date;
 import java.util.List;
 
-public interface OrderRepository extends PagingAndSortingRepository<OrderEntity, Integer> {
+public interface OrderRepository extends PagingAndSortingRepository<OrderEntity, Long> {
 
    /**
     * Select all orders for the page ordered by the timeOrderPlaced value in
