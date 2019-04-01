@@ -75,9 +75,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.apache.camel:camel-spring-boot-starter:2.23.1'
     implementation 'org.apache.camel:camel-sql-starter:2.23.1'
+    implementation 'org.apache.camel:camel-swagger-java-starter:2.23.1'
+    implementation 'org.apache.camel:camel-jackson-starter:2.23.1'
     compile 'org.apache.camel:camel-jms:2.23.1'
+    compile 'org.apache.camel:camel-http4:2.23.1'
+    
     implementation 'org.apache.activemq:activemq-pool'
 
+    
     compile 'org.apache.activemq:activemq-camel:5.15.8'
     implementation 'org.apache.kafka:kafka-streams'
     implementation 'org.liquibase:liquibase-core'

@@ -5,8 +5,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.builder.xml.Namespaces;
 import org.springframework.stereotype.Component;
 
-import javax.print.attribute.standard.MediaSize;
-
 @Component
 public class QueueRouter extends RouteBuilder {
 
