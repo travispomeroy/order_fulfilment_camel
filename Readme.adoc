@@ -8,3 +8,6 @@ center in a file.
 * Handle multiple fulfilment centers
 * Recieve orders from new sources
 * Process orders faster
+
+=== Hawtio
+http://localhost:8081/actuator/hawtio

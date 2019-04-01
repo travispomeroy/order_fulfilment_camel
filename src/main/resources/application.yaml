@@ -13,3 +13,10 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "hawtio,jolokia"
+  server:
+    port: 8081
