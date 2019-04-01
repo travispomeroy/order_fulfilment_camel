@@ -1,13 +1,25 @@
 == Order Fulfilment Sprint Boot Application
 
-This application recieves orders from a database and sends those orders to a fulfillment
+This application receives orders from a database and sends those orders to a fulfillment
 center in a file.
 
 === New Requirements
 
 * Handle multiple fulfilment centers
-* Recieve orders from new sources
+* Receive orders from new sources
 * Process orders faster
 
 === Hawtio
 http://localhost:8081/actuator/hawtio
+
+=== Current Routes
+* Polls database, extracts orders, converts to csv file and drops file into fulfillment center
+* Polls database, extracts orders, converts to xml format (as described in the xsd) and
+publishes to queue
+* Polls queue, filter order by destination and publishes order to proper destination queue.
+
+=== Required Properties
+Please refer to the sample.application.properties to configure the database and ActiveMq
+
+=== Liquibase
+Liquibase will install the database schema
