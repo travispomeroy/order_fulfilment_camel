@@ -3,6 +3,15 @@
 This application receives orders from a database and sends those orders to a fulfillment
 center in a file.
 
+The project is inspired by the Pluralsight Intro to Apache Camel course.  I have updated the
+ project in several aspects.
+ * Spring Boot
+ * Liquibase
+ * Gradle
+ * Updated dependencies
+ * Leverage the auto-configuration of Spring Boot to avoid all the manual configuration from
+  the class
+
 === New Requirements
 
 * Handle multiple fulfilment centers
